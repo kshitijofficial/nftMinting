@@ -3,7 +3,7 @@ const multer = require('multer')
 const cors = require('cors');
 const axios = require('axios')
 const app = express()
-const port=process.env.PORT || 5000
+const port=process.env.PORT || 3000
 
 app.use(express.json())
 
@@ -16,7 +16,7 @@ const upload = multer({
 const starton = axios.create({
     baseURL: "https://api.starton.io/v3",
     headers: {
-        "x-api-key": "sk_live_dd49df13-879d-4f85-81fa-a90881bb4b54",
+        "x-api-key": "sk_live_78a4ef8a-e42d-4e0b-8d33-1cf7c035e765",
     },
   })
 
@@ -48,8 +48,8 @@ const starton = axios.create({
     }
     
     const SMART_CONTRACT_NETWORK="polygon-mumbai"
-    const SMART_CONTRACT_ADDRESS="0x0245C4fA1b848e49e257c49a620B0e05c3F0bDE0"
-    const WALLET_IMPORTED_ON_STARTON="0x95008b0CB1FfCcFb240De7747631Dc2EBA6F3b15";
+    const SMART_CONTRACT_ADDRESS="0x327963b5b1A2b6d68c8A210c6625f13f2F58F43e"
+    const WALLET_IMPORTED_ON_STARTON="0xE4ecbffc5a151c1E39bC83d0FB8d8f4A03582b4D";
     async function mintNFT(receiverAddress,metadataCid){
         const nft = await starton.post(`/smart-contract/${SMART_CONTRACT_NETWORK}/${SMART_CONTRACT_ADDRESS}/call`, {
             functionName: "mint",
@@ -59,7 +59,7 @@ const starton = axios.create({
         })
         return nft.data;
     }
-    const RECEIVER_ADDRESS = "0x4653CeA34af4B3cF4B27C912A5BBEE015b9E7Fb0"
+    const RECEIVER_ADDRESS = "0x4ED79b592C0132C79A43E1A915290AB72349D6d5"
     const ipfsImgData = await uploadImageOnIpfs();
     const ipfsMetadata = await uploadMetadataOnIpfs(ipfsImgData.cid);
     const nft = await mintNFT(RECEIVER_ADDRESS,ipfsMetadata.cid)
